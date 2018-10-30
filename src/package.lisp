@@ -2,4 +2,5 @@
 ;;;; package.lisp
 
 (defpackage #:project-create
-  (:use #:cl))
+  (:use #:cl)
+  (:export :main))
