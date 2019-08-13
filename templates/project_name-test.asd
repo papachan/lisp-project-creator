@@ -1,7 +1,7 @@
-;;;; {{project_name}}.asd
+;;;; {{project_name}}-test.asd
 
 (asdf:defsystem #:{{project_name}}-test
-  :author "Dan Loaiza <papachan@gmail.com>"
+  :author ""
   :license  "BSD"
   :depends-on (:fiveam)
   :serial t

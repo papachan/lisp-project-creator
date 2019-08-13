@@ -1,10 +1,10 @@
 ;;;; {{project_name}}.asd
 
 (asdf:defsystem #:{{project_name}}
-  :author "Dan Loaiza <papachan@gmail.com>"
+  :author ""
   :license  "BSD"
   :depends-on (:fiveam
-               ::{{project_name}}-test)
+               :{{project_name}}-test)
   :serial t
   :components (
                (:module "src"

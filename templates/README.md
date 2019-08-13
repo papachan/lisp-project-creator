@@ -4,10 +4,11 @@ Your description here ...
 
 # Author
 
+Your name
 
 # Copyright
 
-Copyright (c) 2018 
+Copyright (c) {{year}}
 
 # License
 

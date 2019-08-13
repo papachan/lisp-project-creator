@@ -1,4 +1,4 @@
-NAME=cl-binary
+NAME=project-creator
 
 BINARY=$(HOME)/bin/$(NAME)
 SCRIPT=$(PWD)/$(NAME)
