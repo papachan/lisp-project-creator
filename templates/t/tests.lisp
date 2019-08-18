@@ -6,10 +6,6 @@
 
 (in-suite all-tests)
 
-(test dummy-dummy-tests
-  "Just a placeholder."
-  (is (equal 1 1)))
-
 (test dummy-tests
   "Just a placeholder."
   (is (listp (list 1 2)))

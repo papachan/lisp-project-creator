@@ -3,11 +3,8 @@
 (asdf:defsystem #:{{project_name}}
   :author ""
   :license  "BSD"
-  :depends-on (:fiveam
-               :{{project_name}}-test)
   :serial t
-  :components (
-               (:module "src"
+  :components ((:module "src"
                 :serial t
                 :components
                 ((:file "package")

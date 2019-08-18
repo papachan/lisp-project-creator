@@ -3,7 +3,8 @@
 
 (in-package :project-create)
 
-(defconstant *debug* t)
+;; setup debun to nil when you make an image
+(defconstant *debug* nil)
 
 (defvar *templates-dir*
   (asdf:system-relative-pathname :project-create #P"templates"))
@@ -13,13 +14,12 @@
       (pathname-parent-directory (asdf:system-relative-pathname :project-create ""))
       (make-pathname :directory '(:relative "."))))
 
-(defun getcurrentyear ()
+(defun get-current-year ()
   (multiple-value-bind (s min h d m y) (decode-universal-time (get-universal-time))
     (declare (ignore s min h))
-    (format nil "~A" y)))
+    y))
 
 (defun copy-files (lst values)
-  (print values)
   (loop :for n :in lst
         :do (with-open-file (output-stream (second n)
                                            :direction :output
@@ -38,8 +38,6 @@
     (let* ((project-name (prompt "What is your project name?"))
            (project-root (merge-pathnames (concatenate 'string project-name "/")
                                           *local-directory*))
-           (values (list (cons :project_name project-name)
-                         (cons :year (getcurrentyear))))
            (files '()))
       (progn
         ;; create directories
@@ -66,7 +64,9 @@
                             (if (not (null (search "asd" (namestring path))))
                                 (push (list path (replace-all newpath "project_name" project-name)) files)
                                 (push (list path newpath) files)))))
-        (copy-files files values)
+
+        (copy-files files (list (cons :project_name project-name)
+                                (cons :year (get-current-year))))
         (format t ";; DONE~%")))))
 
 

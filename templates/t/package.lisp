@@ -2,7 +2,7 @@
 ;;; package.lisp
 (asdf:oos 'asdf:load-op :fiveam)
 
-(defpackage {{project_name}}-test
+(defpackage #:{{project_name}}-test
   (:use :cl
         :fiveam
         :{{project_name}}))
