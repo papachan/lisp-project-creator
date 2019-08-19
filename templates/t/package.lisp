@@ -4,5 +4,7 @@
 
 (defpackage #:{{project_name}}-test
   (:use :cl
-        :fiveam
-        :{{project_name}}))
+        :fiveam)
+  (:import-from
+   :{{project_name}}
+   :hello))

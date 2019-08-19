@@ -4,6 +4,6 @@
 (in-package #:{{project_name}})
 
 (defun hello ()
-  (format t "~A" '(1 2)))
+  (format nil "~A" '(1 2)))
 
-(hello)
+(format t ";;; Done~%")
