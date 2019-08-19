@@ -70,8 +70,7 @@
         (format t ";; DONE~%")))))
 
 
-(print *local-directory*)
-
-(main)
+(if *debug*
+    (main))
 
 ;; main.lisp ends here
