@@ -10,7 +10,7 @@ all: $(NAME)
 $(NAME):
 	sbcl --load project-create.asd \
                 --eval '(ql:quickload :project-create)' \
-                --eval "(sb-ext:save-lisp-and-die #p\"project-create\" :toplevel #'project-create:main :executable t)"
+                --eval "(sb-ext:save-lisp-and-die #p\"create\" :toplevel #'project-create:main :executable t)"
 
 
 install: $(NAME)
