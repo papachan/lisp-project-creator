@@ -42,9 +42,9 @@
       (progn
         ;; create directories
         (loop :for n in '("t" "src")
-           :do (ensure-directories-exist (merge-pathnames
-                                          (concatenate 'string project-name "/" n "/")
-                                          *local-directory*)))
+              :do (ensure-directories-exist (merge-pathnames
+                                             (concatenate 'string project-name "/" n "/")
+                                             *local-directory*)))
         (unless (directory-exists-p project-root)
           (error "~S does not exist." project-root))
 
