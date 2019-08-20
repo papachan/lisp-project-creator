@@ -1,6 +1,7 @@
 # Project-create
 
-A simple lisp project to generate quickly a customized project scaffold.
+A simple project in common lisp to generate quickly a customized lisp
+project ready to be used with asdf.
 
 # Author
 

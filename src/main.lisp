@@ -41,20 +41,14 @@
            (files '()))
       (progn
         ;; create directories
-        (ensure-directories-exist project-root)
-
+        (loop :for n in '("t" "src")
+           :do (ensure-directories-exist (merge-pathnames
+                                          (concatenate 'string project-name "/" n "/")
+                                          *local-directory*)))
         (unless (directory-exists-p project-root)
           (error "~S does not exist." project-root))
 
-        (ensure-directories-exist (merge-pathnames
-                                   (concatenate 'string project-name "/t/")
-                                   *local-directory*))
-
-        (ensure-directories-exist (merge-pathnames
-                                   (concatenate 'string project-name "/src/")
-                                   *local-directory*))
-
-        ;; update paths with new_path and new filename
+        ;; make a list from real path and new path file
         (walk-directory *templates-dir*
                         (lambda (path)
                           (let* ((templates-dir (asdf:system-relative-pathname :project-create "templates"))
