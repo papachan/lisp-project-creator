@@ -51,13 +51,17 @@
         ;; make a list from real path and new path file
         (walk-directory *templates-dir*
                         (lambda (path)
-                          (let* ((len (length (namestring *templates-dir*)))
-                                 (subpath (subseq (namestring path) len))
-                                 (newpath (concatenate 'string (namestring *local-directory*) project-name subpath)))
-                            (if (not (null (search "asd" (namestring path))))
-                                (push (list path (replace-all newpath "project_name" project-name)) files)
-                                (push (list path newpath) files)))))
-
+                          (let* ((fname (file-namestring path))
+                                 (name (subseq fname 0 (position #\. fname :test #'equal)))
+                                 (subpath (make-pathname :directory
+                                                         (append (list :relative)
+                                                                 (cdr (member "templates" (pathname-directory path) :test #'equal)))
+                                                         :name (if (search "asd" fname)
+                                                                   (replace-all name "project_name" project-name)
+                                                                   name)
+                                                         :type (subseq fname (1+ (position #\. fname :test #'equal)))))
+                                 (newpath (merge-pathnames subpath project-root)))
+                            (push (list path newpath) files))))
         (copy-files files (list (cons :project_name project-name)
                                 (cons :year (get-current-year))))
         (format t ";; DONE~%")))))
