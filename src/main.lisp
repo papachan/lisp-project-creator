@@ -36,23 +36,22 @@
            (force-output *query-io*)
            (read-line *query-io*)))
     (let* ((project-name (prompt "What is your project name?"))
-           (project-root (merge-pathnames (concatenate 'string project-name "/")
-                                          *local-directory*))
+           (project-root (make-pathname :directory
+                                        (append (pathname-directory *local-directory*) (list project-name))))
            (files '()))
       (progn
         ;; create directories
         (loop :for n in '("t" "src")
-              :do (ensure-directories-exist (merge-pathnames
-                                             (concatenate 'string project-name "/" n "/")
-                                             *local-directory*)))
+              :do (ensure-directories-exist
+                   (make-pathname :directory
+                                  (append (pathname-directory project-root) (list n)))))
         (unless (directory-exists-p project-root)
           (error "~S does not exist." project-root))
 
         ;; make a list from real path and new path file
         (walk-directory *templates-dir*
                         (lambda (path)
-                          (let* ((templates-dir (asdf:system-relative-pathname :project-create "templates"))
-                                 (len (length (namestring templates-dir)))
+                          (let* ((len (length (namestring *templates-dir*)))
                                  (subpath (subseq (namestring path) len))
                                  (newpath (concatenate 'string (namestring *local-directory*) project-name subpath)))
                             (if (not (null (search "asd" (namestring path))))
