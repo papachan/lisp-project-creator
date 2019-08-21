@@ -56,9 +56,7 @@
                                  (subpath (make-pathname :directory
                                                          (append (list :relative)
                                                                  (cdr (member "templates" (pathname-directory path) :test #'equal)))
-                                                         :name (if (search "asd" fname)
-                                                                   (replace-all name "project_name" project-name)
-                                                                   name)
+                                                         :name (mustache:render* name (list (cons :project_name project-name)))
                                                          :type (subseq fname (1+ (position #\. fname :test #'equal)))))
                                  (newpath (merge-pathnames subpath project-root)))
                             (push (list path newpath) files))))
