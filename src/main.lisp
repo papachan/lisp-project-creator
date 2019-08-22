@@ -3,16 +3,16 @@
 
 (in-package :project-create)
 
-;; setup debun to nil when you make an image
-(defconstant *debug* nil)
-
-(defvar *templates-dir*
-  (asdf:system-relative-pathname :project-create #P"templates"))
+;; setup debug to nil when you create an image
+(defvar *debug* nil)
 
 (defvar *local-directory*
   (if *debug*
-      (pathname-parent-directory (asdf:system-relative-pathname :project-create ""))
+      (asdf:system-relative-pathname :project-create "")
       (make-pathname :directory '(:relative "."))))
+
+(defvar *templates-dir*
+  (asdf:system-relative-pathname :project-create #P"templates"))
 
 (defun get-current-year ()
   (multiple-value-bind (s min h d m y) (decode-universal-time (get-universal-time))
