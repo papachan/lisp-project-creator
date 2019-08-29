@@ -34,7 +34,7 @@
   (flet ((prompt (string)
            (format *query-io* "~a: " string)
            (force-output *query-io*)
-           (read-line *query-io*)))
+           (string-trim '(#\space #\tab) (read-line *query-io*))))
     (let* ((project-name (prompt "What is your project name?"))
            (project-root (make-pathname :directory
                                         (append (pathname-directory *local-directory*) (list project-name))))
