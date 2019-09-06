@@ -28,7 +28,7 @@
               (mustache:render (read-file-string (car n)) values output-stream)
               (format t "~A~%" (second n)))))
 
-(defun main ()
+(defun main (&aux (files '()))
   "Ask for a package name and create all files"
   (flet ((prompt (string)
            (let ((*error-output* *query-io*)
@@ -39,8 +39,7 @@
                (sb-sys:interactive-interrupt ()
                  (format *error-output* "~%Aborting.~&")
                  (uiop:quit))))))
-    (let* ((files '())
-           (project-name (prompt "Your package name?"))
+    (let* ((project-name (prompt "Your package name?"))
            (project-root (make-pathname :directory
                                         (append (pathname-directory *local-directory*)
                                                 (list project-name)))))
